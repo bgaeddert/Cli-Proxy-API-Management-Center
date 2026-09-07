@@ -161,6 +161,7 @@ export interface ModelEntryInput {
   priority?: number;
   testModel?: string;
   image?: boolean;
+  transcription?: boolean;
   /** Original backend value, preserved until the standard-level selector is changed. */
   thinkingJson?: string;
   thinkingLevels?: ThinkingLevel[];

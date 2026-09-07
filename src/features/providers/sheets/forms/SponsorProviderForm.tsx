@@ -150,6 +150,7 @@ const modelsFromConfig = (
         priority?: number;
         testModel?: string;
         image?: boolean;
+        transcription?: boolean;
         thinking?: Record<string, unknown>;
       }>
     | undefined
@@ -161,6 +162,7 @@ const modelsFromConfig = (
         priority: model.priority,
         testModel: model.testModel,
         image: model.image === true,
+        transcription: model.transcription === true,
         thinkingJson: model.thinking ? JSON.stringify(model.thinking, null, 2) : '',
         thinkingLevels: readThinkingLevels(model.thinking),
       }))
@@ -313,6 +315,7 @@ function SponsorModelSection({
         <ModelEntriesEditor
           models={modelsList}
           supportsImage={protocol === 'openai'}
+          supportsTranscription={protocol === 'openai'}
           supportsThinking
           mutating={mutating}
           removeDisabled={modelsList.length <= 1}

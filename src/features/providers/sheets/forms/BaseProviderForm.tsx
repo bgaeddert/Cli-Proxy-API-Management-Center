@@ -129,6 +129,7 @@ function buildInitialForm(
             priority: m.priority,
             testModel: m.testModel,
             image: m.image === true,
+            transcription: m.transcription === true,
             thinkingJson: formatJsonObject(m.thinking),
             thinkingLevels: readThinkingLevels(m.thinking),
           }))
@@ -486,6 +487,7 @@ export function BaseProviderForm({
     isClaudeLikeBrand(brand) ||
     brand === 'openaiCompatibility';
   const supportsModelImage = brand === 'openaiCompatibility';
+  const supportsModelTranscription = brand === 'openaiCompatibility';
   const singleConnectivity =
     brand === 'codex' || brand === 'xai'
       ? { status: connectivity.codexStatus, run: connectivity.runCodex }
@@ -907,6 +909,7 @@ export function BaseProviderForm({
             <ModelEntriesEditor
               models={modelsList}
               supportsImage={supportsModelImage}
+              supportsTranscription={supportsModelTranscription}
               supportsThinking
               mutating={mutating}
               removeDisabled={modelsList.length <= 1}

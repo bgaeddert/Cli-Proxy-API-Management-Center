@@ -12,6 +12,8 @@ interface ModelEntriesEditorProps {
   models: ModelEntryInput[];
   /** Only OpenAI-compatible entries can expose the image-generation capability. */
   supportsImage: boolean;
+  /** Only OpenAI-compatible entries can expose the audio-transcription capability. */
+  supportsTranscription: boolean;
   /** Every backend provider model can override its thinking capability. */
   supportsThinking: boolean;
   mutating: boolean;
@@ -24,6 +26,7 @@ interface ModelEntriesEditorProps {
 export function ModelEntriesEditor({
   models,
   supportsImage,
+  supportsTranscription,
   supportsThinking,
   mutating,
   removeDisabled,
@@ -56,7 +59,7 @@ export function ModelEntriesEditor({
   return (
     <>
       {visible.map((entry, idx) => {
-        const hasExtendedOptions = supportsImage || supportsThinking;
+        const hasExtendedOptions = supportsImage || supportsTranscription || supportsThinking;
         const expanded = hasExtendedOptions && expandedIdx === idx;
         const thinkingLevels = entry.thinkingLevels ?? [];
         const hasThinking = entry.thinkingLevelsTouched
@@ -89,6 +92,11 @@ export function ModelEntriesEditor({
                 {supportsImage && !expanded && entry.image === true ? (
                   <span className={styles.entryBadge}>
                     {t('providersPage.form.modelBadgeImage')}
+                  </span>
+                ) : null}
+                {supportsTranscription && !expanded && entry.transcription === true ? (
+                  <span className={styles.entryBadge}>
+                    {t('providersPage.form.modelBadgeTranscription')}
                   </span>
                 ) : null}
                 {supportsThinking && !expanded && hasThinking ? (
@@ -140,6 +148,21 @@ export function ModelEntriesEditor({
                     <span className={styles.checkboxText}>
                       <span>{t('providersPage.form.modelImage')}</span>
                       <small>{t('providersPage.form.modelImageHint')}</small>
+                    </span>
+                  </label>
+                ) : null}
+                {supportsTranscription ? (
+                  <label className={styles.checkboxRow}>
+                    <input
+                      type="checkbox"
+                      className={styles.checkboxBox}
+                      checked={entry.transcription === true}
+                      disabled={mutating}
+                      onChange={(e) => onUpdate(idx, { transcription: e.target.checked })}
+                    />
+                    <span className={styles.checkboxText}>
+                      <span>{t('providersPage.form.modelTranscription')}</span>
+                      <small>{t('providersPage.form.modelTranscriptionHint')}</small>
                     </span>
                   </label>
                 ) : null}

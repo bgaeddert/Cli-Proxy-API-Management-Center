@@ -34,6 +34,7 @@ const normalizeModelAliases = (models: unknown): ModelAlias[] => {
       const priority = item.priority;
       const testModel = item['test-model'];
       const image = normalizeBoolean(item.image);
+      const transcription = normalizeBoolean(item.transcription);
       const thinking = normalizeRecord(item.thinking);
       const entry: ModelAlias = { name: String(name) };
       if (alias && alias !== name) {
@@ -50,6 +51,9 @@ const normalizeModelAliases = (models: unknown): ModelAlias[] => {
       }
       if (image !== undefined) {
         entry.image = image;
+      }
+      if (transcription !== undefined) {
+        entry.transcription = transcription;
       }
       if (thinking) {
         entry.thinking = thinking;

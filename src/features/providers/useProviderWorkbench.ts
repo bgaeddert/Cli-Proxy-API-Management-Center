@@ -175,6 +175,7 @@ const buildModelAliases = (
       };
       if (includeImage) {
         entry.image = m.image === true;
+        entry.transcription = m.transcription === true;
       }
       return entry;
     })

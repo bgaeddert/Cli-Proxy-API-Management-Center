@@ -49,6 +49,7 @@ export interface ModelAlias {
   inputModalities?: string[];
   outputModalities?: string[];
   useMaxCompletionTokens?: boolean;
+  transcription?: boolean;
   thinking?: Record<string, unknown>;
 }
 

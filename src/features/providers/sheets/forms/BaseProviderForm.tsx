@@ -136,6 +136,7 @@ function buildInitialForm(
             alias: m.alias ?? '',
             priority: m.priority,
             image: m.image === true,
+            transcription: m.transcription === true,
             thinkingJson: formatJsonObject(m.thinking),
             ...readModelOptions(m),
           }))
@@ -473,6 +474,7 @@ export function BaseProviderForm({
         : 'ready';
   const actualApiKeyEntries = form.apiKeyEntries ?? [];
   const supportsModelImage = brand === 'openaiCompatibility';
+  const supportsModelTranscription = brand === 'openaiCompatibility';
   const singleConnectivity =
     brand === 'codex' || brand === 'meta' || brand === 'xai'
       ? { status: connectivity.codexStatus, run: connectivity.runCodex }
@@ -883,6 +885,7 @@ export function BaseProviderForm({
               providerBrand={brand}
               models={modelsList}
               supportsImage={supportsModelImage}
+              supportsTranscription={supportsModelTranscription}
               supportsThinking
               mutating={mutating}
               removeDisabled={modelsList.length <= 1}

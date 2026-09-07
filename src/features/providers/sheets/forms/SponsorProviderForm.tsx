@@ -156,6 +156,7 @@ const modelsFromConfig = (models: ModelAlias[] | undefined): ModelEntryInput[] =
         alias: model.alias ?? '',
         priority: model.priority,
         image: model.image === true,
+        transcription: model.transcription === true,
         thinkingJson: model.thinking ? JSON.stringify(model.thinking, null, 2) : '',
         ...readModelOptions(model),
       }))
@@ -280,6 +281,7 @@ function SponsorModelSection({
           providerBrand={protocol === 'openai' ? 'openaiCompatibility' : protocol}
           models={modelsList}
           supportsImage={protocol === 'openai'}
+          supportsTranscription={protocol === 'openai'}
           supportsThinking
           mutating={mutating}
           removeDisabled={modelsList.length <= 1}

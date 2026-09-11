@@ -33,6 +33,9 @@ const serializeModelAliases = (models?: ModelAlias[], includeOpenAIFields = fals
           if (includeOpenAIFields && model.image) {
             payload.image = true;
           }
+          if (includeOpenAIFields && model.transcription) {
+            payload.transcription = true;
+          }
           return payload;
         })
         .filter(Boolean)

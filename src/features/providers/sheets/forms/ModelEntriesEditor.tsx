@@ -15,7 +15,7 @@ interface ModelEntriesEditorProps {
   /** Only OpenAI-compatible entries can expose the image-generation capability. */
   supportsImage: boolean;
   /** Only OpenAI-compatible entries can expose the audio-transcription capability. */
-  supportsTranscription: boolean;
+  supportsTranscription?: boolean;
   /** Every backend provider model can override its thinking capability. */
   supportsThinking: boolean;
   mutating: boolean;
